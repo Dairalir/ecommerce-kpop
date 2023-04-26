@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SousRubriqueController!
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<h1>Sous-Catégories</h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Nom</th>
+					<th scope="col">Image</th>
+				</tr>
+			</thead>
+			<tbody>
+                {% for sous_rubrique in sous_rubriques %}
+
+				<tr>
+					<th scope="row">{{sous_rubrique.id}}</th>
+					<td>{{sous_rubrique.name}}</td>
+					<td>{{sous_rubrique.picture}}</td>
+					
+				</tr>
+                {% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}
+
