@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+
+{{ rubrique.name }}
+{% for sous_rubrique in rubrique.sousRubriques %}
+
+{{ sous_rubrique.name}}
+
+{% endfor %}
+
+
+
+{% endblock %}

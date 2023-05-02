@@ -2,17 +2,29 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Rubrique;
+use App\Repository\RubriqueRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/rubrique', name: 'app_rubrique')]
 class RubriqueController extends AbstractController
 {
-    #[Route('/rubrique', name: 'app_rubrique')]
+    #[Route('/', name: '')]
     public function index(): Response
     {
         return $this->render('rubrique/index.html.twig', [
             'controller_name' => 'RubriqueController',
+        ]);
+    }
+    
+    #[Route('/{id}', name: '_show')]
+    // on utilise la classe de l'entité et on lui assigne une variable pour afficher le contenu de la classe
+    public function show(Rubrique $rubrique):Response
+    {
+        return $this->render('rubrique/show.html.twig', [
+            'rubrique' => $rubrique,
         ]);
     }
 }
