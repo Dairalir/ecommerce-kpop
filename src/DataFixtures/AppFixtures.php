@@ -31,7 +31,7 @@ class AppFixtures extends Fixture
             $manager->persist($rubrique);
             $this->addReference("rubrique_$i", $rubrique);
         }
-        // create 20 sous rubrique
+        // create sous rubrique
         for ($i = 0; $i < 5; $i++) {
             $sous_rubrique = new SousRubrique();
             $sous_rubrique->setName('sous_rubrique '.$i);
@@ -41,16 +41,16 @@ class AppFixtures extends Fixture
             $this->addReference("sous_rubrique_$i", $sous_rubrique);
         }
 
-        //    $produit = new Produit();
-        //    $produit->setName('produit1 ');
-        //    $produit->setDescription("description1");
-        //    $produit->setPrice("prix1");
-        //    $produit->setPicture("photo1");
-        //    $produit->setStock(10);
-        //    $produit->setActive(true);
-        //    $produit->addSousRubrique($this->getReference("sous_rubrique_". 1));
-        //    $produit->setFournisseur($this->getReference("fournisseur_". 1));
-        //    $manager->persist($produit);
+            $produit = new Produit();
+            $produit->setName('produit1 ');
+            $produit->setDescription("description1");
+            $produit->setPrice(10,99);
+            $produit->setPicture("photo1");
+            $produit->setStock(10);
+            $produit->setActive(true);
+            $produit->addSousRubrique($this->getReference("sous_rubrique_". 1));
+            $produit->setFournisseur($this->getReference("fournisseur_". 1 -1));
+            $manager->persist($produit);
 
         $manager->flush();
     }
