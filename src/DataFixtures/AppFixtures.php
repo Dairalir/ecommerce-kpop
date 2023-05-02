@@ -32,26 +32,25 @@ class AppFixtures extends Fixture
             $this->addReference("rubrique_$i", $rubrique);
         }
         // create 20 sous rubrique
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $sous_rubrique = new SousRubrique();
             $sous_rubrique->setName('sous_rubrique '.$i);
             $sous_rubrique->setPicture("photo_$i");
             $sous_rubrique->setRubrique($this->getReference("rubrique_".mt_rand(0, 4)));
             $manager->persist($sous_rubrique);
+            $this->addReference("sous_rubrique_$i", $sous_rubrique);
         }
 
-        for ($i = 0; $i < 20; $i++) {
-            $produit = new Produit();
-            $produit->setName('sous_rubrique '.$i);
-            $produit->setDescription("description_$i");
-            $produit->setPrice("prix_$i");
-            $produit->setPicture("photo_$i");
-            $produit->setStock(10);
-            $produit->setActive(true);
-            $produit->addSousRubrique($this->getReference("sous_rubrique_".mt_rand(0, 19)));
-            $produit->setFournisseur($this->getReference("fournisseur_".mt_rand(0, 4)));
-            $manager->persist($produit);
-        }
+        //    $produit = new Produit();
+        //    $produit->setName('produit1 ');
+        //    $produit->setDescription("description1");
+        //    $produit->setPrice("prix1");
+        //    $produit->setPicture("photo1");
+        //    $produit->setStock(10);
+        //    $produit->setActive(true);
+        //    $produit->addSousRubrique($this->getReference("sous_rubrique_". 1));
+        //    $produit->setFournisseur($this->getReference("fournisseur_". 1));
+        //    $manager->persist($produit);
 
         $manager->flush();
     }

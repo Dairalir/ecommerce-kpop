@@ -5,6 +5,37 @@
 
 {% block body %}
 
+	<div class="container-fluid col-12">
+        <p>
+            <Span><a class="text-decoration-none link-dark" href="index.html">Home </a></Span>/
+            <span><a> Groupes Féminins </a></span>/
+            <span class="fw-bold"> Groupe 1</span>
+        </p>
+        <h1 class="text-center m-2 mb-3">Sous-Catégories</h1>
+        <div class="row">
+            <div class="container-fluid col-12 bg-light mb-5">
+                <div class="row">
+                    <p class="text-center mt-3"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                        et dolore magna aliqua.<br>
+                        Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.<br>
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                        pariatur.<br>
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                        est laborum.<br>
+                    </p>
+                </div>
+            </div>
+			{% for sous_rubrique in sous_rubriques %}
+            <div class="col-sm-6 col-xl-3">
+                <a class="text-decoration-none link-dark" href="#">
+                <div class="text-center m-3"><img src="https://picsum.photos/280/280?random=4" class="d-block w-100" alt="..."></div>
+                <p class="text-center">{{sous_rubrique.name}}</p>
+                </a>
+            </div>
+			{% endfor %}
+        </div>
+    </div>
 	<div class="container">
 		<h1>Sous-Catégories</h1>
 		<table class="table">
