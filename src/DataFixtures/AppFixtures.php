@@ -36,7 +36,7 @@ class AppFixtures extends Fixture
             $sous_rubrique = new SousRubrique();
             $sous_rubrique->setName('sous_rubrique '.$i);
             $sous_rubrique->setPicture("photo_$i");
-            $sous_rubrique->setRubrique($this->getReference("rubrique_".mt_rand(0, 4)));
+            $sous_rubrique->setRubrique($this->getReference("rubrique_".$i));
             $manager->persist($sous_rubrique);
             $this->addReference("sous_rubrique_$i", $sous_rubrique);
         }
@@ -48,7 +48,7 @@ class AppFixtures extends Fixture
             $produit->setPicture("photo1");
             $produit->setStock(10);
             $produit->setActive(true);
-            $produit->addSousRubrique($this->getReference("sous_rubrique_". 1));
+            $produit->addSousRubrique($this->getReference("sous_rubrique_". 1 -1));
             $produit->setFournisseur($this->getReference("fournisseur_". 1 -1));
             $manager->persist($produit);
 
