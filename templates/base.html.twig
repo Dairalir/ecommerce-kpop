@@ -28,19 +28,19 @@
             </button>
             <ul class="navbar-nav me-auto ms-2 mb-lg-0">
                 <li class="nav-item text-center">
-                    <a class="nav-brand" href="{{ path('app_index') }}"><img src="" alt=""></a>
+                    <a class="nav-brand" href="{{ path('app_index') }}"><img src="{{ asset('img/assets/logo.png') }}" alt="logo" width="100px"></a>
                 </li>
             </ul>
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_rubrique_show', {id:1}) }}">Albums</a>
+                        <a class="nav-link" href="{{ path('app_rubrique_show', {'id':1}) }}">Albums</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_rubrique_show', {id:2}) }}">Merch</a>
+                        <a class="nav-link" href="{{ path('app_rubrique_show', {'id':2}) }}">Merch</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_rubrique_show', {id:3}) }}">Groupes</a>
+                        <a class="nav-link" href="{{ path('app_rubrique_show', {'id':3}) }}">Groupes</a>
                     </li>
                 </ul>
                 <form class="d-flex">
