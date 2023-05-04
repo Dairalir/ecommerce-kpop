@@ -82,10 +82,10 @@ class ProduitType extends AbstractType
             ])
             ->add('sous_rubrique', EntityType::class, [
                 'class' => SousRubrique::class,
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('sous_rubrique')
-                        ->orderBy('sous_rubrique.rubrique', 'ASC');
-                },
+                //'query_builder' => function (EntityRepository $er) {
+                //    return $er->createQueryBuilder('sous_rubrique')
+                //        ->orderBy('sous_rubrique.rubrique', 'ASC');
+                //},
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true,

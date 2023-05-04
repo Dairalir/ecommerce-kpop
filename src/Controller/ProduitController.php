@@ -33,32 +33,33 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $produitRepository->save($produit, true);
+            
 
             $imgProduit = $form['picture']->getData();
 
-        if($imgProduit){
-            $originalFilename = pathinfo($imgProduit->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$imgProduit->guessExtension();
-
-                try {
-                    $imgProduit->move(
-                        $this->getParameter('img_product_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
+            if($imgProduit){
+                $originalFilename = pathinfo($imgProduit->getClientOriginalName(), PATHINFO_FILENAME);
+                    // this is needed to safely include the file name as part of the URL
+                    $safeFilename = $slugger->slug($originalFilename);
+                    $newFilename = $safeFilename.'-'.uniqid().'.'.$imgProduit->guessExtension();
+            
+                    try {
+                        $imgProduit->move(
+                            $this->getParameter('img_product_directory'),
+                            $newFilename
+                        );
+                    } catch (FileException $e) {
+                        // ... handle exception if something happens during file upload
+                    }
+                    $produit->setPicture($newFilename);
                 }
-                $produit->setPicture($newFilename);
+                $produitRepository->save($produit, true);
+
+                return $this->redirectToRoute('app_produit', [], Response::HTTP_SEE_OTHER);
+                
             }
 
-            return $this->redirectToRoute('app_produit', [], Response::HTTP_SEE_OTHER);
-            
-        }
-
-        return $this->render('produit/new.html.twig', [
+            return $this->render('produit/new.html.twig', [
                 'produit' => $produit,
                 'form' => $form->createView(),
             ]);
@@ -72,5 +73,4 @@ class ProduitController extends AbstractController
             'produit' => $produit,
         ]);
     }
-
 }

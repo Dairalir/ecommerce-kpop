@@ -1,24 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{produit.name}}{% endblock %}
+{% block title %}
+	{{produit.name}}
+{% endblock %}
 
 {% block body %}
-<div class="container-fluid col-12">
-        <div class="row">
-            <div class="col-5 my-5 ms-5">
-                <img src="{{asset('img/produits/' ~ produit.picture)}}" class="d-block w-100" alt="">
-            </div>
-            <div class="col my-5 ms-5 bg-light">
-                <h1 class="ms-3 mt-3">{{produit.name}}</h1>
-                <p class="fs-1 ms-3 mt-3">{{produit.price}} €</p>
-                <p class="fs-2 ms-3 mt-3">Description :</p>
-                <p class="ms-3">{{produit.description}}</p>
-                <div class="text-center">
-                    <button type="button"class="btn btn-secondary btn-lg ms-3 mt-4">
-                        Ajouter au panier
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="container-fluid col-12">
+		<div class="row">
+			<div class="col-5 my-5 ms-5">
+				<img src="{{asset('img/produits/' ~ produit.picture)}}" class="d-block w-100" alt="">
+			</div>
+			<div class="col my-5 ms-5 bg-light">
+				<h1 class="ms-3 mt-3">{{produit.name}}</h1>
+				<p class="fs-1 ms-3 mt-3">{{produit.price}}
+					€</p>
+				<p class="fs-2 ms-3 mt-3">Description :</p>
+				<p class="ms-3">{{produit.description}}</p>
+				<div class="text-center">
+					<button type="button" class="btn btn-secondary btn-lg ms-3 mt-4">
+						Ajouter au panier
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
