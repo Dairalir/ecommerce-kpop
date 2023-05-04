@@ -88,6 +88,7 @@ class ProduitType extends AbstractType
                 },
                 'choice_label' => 'name',
                 'multiple' => true,
+                'expanded' => true,
             ])
             ->add('fournisseur', EntityType::class, [
                 'class' => Fournisseur::class,
@@ -96,7 +97,8 @@ class ProduitType extends AbstractType
                     ;
                 },
                 'choice_label' => 'name',
-                'multiple' => true,
+                'multiple' => false,
+                'expanded' => true,
             ])
         ;
     }
