@@ -54,7 +54,7 @@ class ProduitController extends AbstractController
                 $produit->setPicture($newFilename);
             }
 
-            return $this->redirectToRoute('produit', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_produit', [], Response::HTTP_SEE_OTHER);
             
         }
 
