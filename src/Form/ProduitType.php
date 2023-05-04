@@ -62,6 +62,7 @@ class ProduitType extends AbstractType
             ->add('picture', FileType::class,[
                 'label' => 'Image du produit',
                 'help' => 'Selectionnez une image',
+                'data_class' => null,
                 'attr' => [
                     'placeholder' => 'image.jpg',
                 ],
