@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 #[Route('/produit')]
 class ProduitController extends AbstractController
 {
-    #[Route('/', name: 'app_produit')]
+    #[Route('/', name: 'app_produit', methods: ['GET'])]
     public function index(ProduitRepository $produitRepository): Response
     {
         return $this->render('produit/index.html.twig', [
@@ -27,13 +27,10 @@ class ProduitController extends AbstractController
     public function new(Request $request, ProduitRepository $produitRepository, SluggerInterface $slugger): Response
     {
         $produit = new Produit();
-        // création du formulaire
         $form = $this->createForm(ProduitType::class, $produit);
-        // lecture du formulaire
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
 
             $imgProduit = $form['picture']->getData();
 
@@ -53,21 +50,21 @@ class ProduitController extends AbstractController
                     }
                     $produit->setPicture($newFilename);
                 }
-                $produitRepository->save($produit, true);
 
-                return $this->redirectToRoute('app_produit', [], Response::HTTP_SEE_OTHER);
-                
-            }
 
-            return $this->render('produit/new.html.twig', [
-                'produit' => $produit,
-                'form' => $form->createView(),
-            ]);
+            $produitRepository->save($produit, true);
+
+            return $this->redirectToRoute('app_produit', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('produit/new.html.twig', [
+            'produit' => $produit,
+            'form' => $form,
+        ]);
     }
 
-    #[Route('/{id}', name: 'app_produit_show')]
-    // on utilise la classe de l'entité et on lui assigne une variable pour afficher le contenu de la classe
-    public function show(Produit $produit):Response
+    #[Route('/{id}', name: 'app_produit_show', methods: ['GET'])]
+    public function show(Produit $produit): Response
     {
         return $this->render('produit/show.html.twig', [
             'produit' => $produit,
@@ -83,13 +80,22 @@ class ProduitController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $produitRepository->save($produit, true);
 
-            return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_produit', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('produit/edit.html.twig', [
             'produit' => $produit,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
-}
 
+    #[Route('/{id}', name: 'app_produit_delete', methods: ['POST'])]
+    public function delete(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->request->get('_token'))) {
+            $produitRepository->remove($produit, true);
+        }
+
+        return $this->redirectToRoute('app_produit', [], Response::HTTP_SEE_OTHER);
+    }
+}
