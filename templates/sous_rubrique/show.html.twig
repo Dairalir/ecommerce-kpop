@@ -24,6 +24,10 @@
 						<p class="text-center">{{produit.name}}</p>
 					</a>
 				</div>
+			{% else %}
+				<tr>
+					<td colspan="8">Pas de produit trouvé</td>
+				</tr>
 			{% endfor %}
 		</div>
 	</div>
