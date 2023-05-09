@@ -81,7 +81,6 @@ class ProduitController extends AbstractController
     public function edit(Request $request, Produit $produit, ProduitRepository $produitRepository, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(ProduitType::class, $produit);
-        //$form['picture'] = $produit->getPicture();
         $form->handleRequest($request);
         
 
