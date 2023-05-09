@@ -37,20 +37,20 @@ class ProduitController extends AbstractController
 
             if($imgProduit){
                 $originalFilename = pathinfo($imgProduit->getClientOriginalName(), PATHINFO_FILENAME);
-                    // this is needed to safely include the file name as part of the URL
-                    $safeFilename = $slugger->slug($originalFilename);
-                    $newFilename = $safeFilename.'-'.uniqid().'.'.$imgProduit->guessExtension();
-            
-                    try {
-                        $imgProduit->move(
-                            $this->getParameter('img_product_directory'),
-                            $newFilename
-                        );
-                    } catch (FileException $e) {
-                        // ... handle exception if something happens during file upload
-                    }
-                    $produit->setPicture($newFilename);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imgProduit->guessExtension();
+        
+                try {
+                    $imgProduit->move(
+                        $this->getParameter('img_product_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
                 }
+                $produit->setPicture($newFilename);
+            }
 
 
             $produitRepository->save($produit, true);
@@ -78,12 +78,32 @@ class ProduitController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
+    public function edit(Request $request, Produit $produit, ProduitRepository $produitRepository, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(ProduitType::class, $produit);
+        //$form['picture'] = $produit->getPicture();
         $form->handleRequest($request);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $imgProduit = $form['picture']->getData();
+
+            if ($imgProduit != null){
+                $originalFilename = pathinfo($imgProduit->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imgProduit->guessExtension();
+                try {
+                    $imgProduit->move(
+                        $this->getParameter('img_product_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $produit->setPicture($newFilename);
+            }
+
             $produitRepository->save($produit, true);
 
             $this->addFlash(

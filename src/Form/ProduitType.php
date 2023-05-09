@@ -63,6 +63,8 @@ class ProduitType extends AbstractType
                 'label' => 'Image du produit',
                 'help' => 'Selectionnez une image',
                 'data_class' => null,
+                'required' => false,
+                'mapped' => false,
                 'attr' => [
                     'placeholder' => 'image.jpg',
                 ],
