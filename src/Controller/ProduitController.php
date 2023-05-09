@@ -54,6 +54,11 @@ class ProduitController extends AbstractController
 
             $produitRepository->save($produit, true);
 
+            $this->addFlash(
+                'success',
+                'Produit ajouté avec succès !!'
+            );
+
             return $this->redirectToRoute('app_produit', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -79,6 +84,11 @@ class ProduitController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $produitRepository->save($produit, true);
+
+            $this->addFlash(
+                'success',
+                'Produit modifié avec succès !!'
+            );
 
             return $this->redirectToRoute('app_produit', [], Response::HTTP_SEE_OTHER);
         }
