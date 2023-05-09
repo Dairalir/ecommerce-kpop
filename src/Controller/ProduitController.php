@@ -78,7 +78,7 @@ class ProduitController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Produit $produit, ProduitRepository $produitRepository, SluggerInterface $slugger): Response
+    public function edit(Request $request, Produit $produit, ProduitRepository $produitRepository, SluggerInterface $slugger, Filesystem $filesystem): Response
     {
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
@@ -89,6 +89,8 @@ class ProduitController extends AbstractController
             $imgProduit = $form['picture']->getData();
 
             if ($imgProduit != null){
+                $filesystem->remove(
+                    $this->getParameter('img_product_directory').'/'.$produit->getPicture());
                 $originalFilename = pathinfo($imgProduit->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$imgProduit->guessExtension();
