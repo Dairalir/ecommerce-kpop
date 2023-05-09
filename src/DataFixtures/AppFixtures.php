@@ -41,17 +41,6 @@ class AppFixtures extends Fixture
             $this->addReference("sous_rubrique_$i", $sous_rubrique);
         }
 
-            $produit = new Produit();
-            $produit->setName('produit1 ');
-            $produit->setDescription("description1");
-            $produit->setPrice(10,99);
-            $produit->setPicture("photo1");
-            $produit->setStock(10);
-            $produit->setActive(true);
-            $produit->addSousRubrique($this->getReference("sous_rubrique_". 1 -1));
-            $produit->setFournisseur($this->getReference("fournisseur_". 1 -1));
-            $manager->persist($produit);
-
         $manager->flush();
     }
 }
