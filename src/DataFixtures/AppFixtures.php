@@ -25,21 +25,72 @@ class AppFixtures extends Fixture
             $this->addReference("fournisseur_$i", $fournisseur);
         }
 
-        for ($i = 0; $i < 5; $i++) {
             $rubrique = new Rubrique();
-            $rubrique->setName('rubrique '.$i);
+            $rubrique->setName('Albums');
             $manager->persist($rubrique);
-            $this->addReference("rubrique_$i", $rubrique);
-        }
-        // create sous rubrique
-        for ($i = 0; $i < 5; $i++) {
+            $this->addReference("Albums", $rubrique);
+
+            $rubrique = new Rubrique();
+            $rubrique->setName('Merch');
+            $manager->persist($rubrique);
+            $this->addReference("Merch", $rubrique);
+
+            $rubrique = new Rubrique();
+            $rubrique->setName('Groupes');
+            $manager->persist($rubrique);
+            $this->addReference("Groupes", $rubrique);
+
+
+            // create sous rubrique
             $sous_rubrique = new SousRubrique();
-            $sous_rubrique->setName('sous_rubrique '.$i);
-            $sous_rubrique->setPicture("photo_$i");
-            $sous_rubrique->setRubrique($this->getReference("rubrique_".$i));
+            $sous_rubrique->setName('EP/mini Albums');
+            $sous_rubrique->setPicture("");
+            $sous_rubrique->setRubrique($this->getReference("Albums"));
             $manager->persist($sous_rubrique);
-            $this->addReference("sous_rubrique_$i", $sous_rubrique);
-        }
+            $this->addReference("EP/mini Albums", $sous_rubrique);
+
+            $sous_rubrique = new SousRubrique();
+            $sous_rubrique->setName('Albums Studio');
+            $sous_rubrique->setPicture("");
+            $sous_rubrique->setRubrique($this->getReference("Albums"));
+            $manager->persist($sous_rubrique);
+            $this->addReference("Albums Studio", $sous_rubrique);
+
+            $sous_rubrique = new SousRubrique();
+            $sous_rubrique->setName('Lighstick');
+            $sous_rubrique->setPicture("");
+            $sous_rubrique->setRubrique($this->getReference("Merch"));
+            $manager->persist($sous_rubrique);
+            $this->addReference("Lighstick", $sous_rubrique);
+
+            $sous_rubrique = new SousRubrique();
+            $sous_rubrique->setName('Dreamcatcher');
+            $sous_rubrique->setPicture("dreamcatcherlogo.jpeg");
+            $sous_rubrique->setRubrique($this->getReference("Groupes"));
+            $manager->persist($sous_rubrique);
+            $this->addReference("Dreamcatcher", $sous_rubrique);
+
+            $sous_rubrique = new SousRubrique();
+            $sous_rubrique->setName('RedVelvet');
+            $sous_rubrique->setPicture("redvelvetlogo.jpeg");
+            $sous_rubrique->setRubrique($this->getReference("Groupes"));
+            $manager->persist($sous_rubrique);
+            $this->addReference("RedVelvet", $sous_rubrique);
+
+            $sous_rubrique = new SousRubrique();
+            $sous_rubrique->setName('Twice');
+            $sous_rubrique->setPicture("twicelogo.jpeg");
+            $sous_rubrique->setRubrique($this->getReference("Groupes"));
+            $manager->persist($sous_rubrique);
+            $this->addReference("Twice", $sous_rubrique);
+
+            $sous_rubrique = new SousRubrique();
+            $sous_rubrique->setName('(G)-idle');
+            $sous_rubrique->setPicture("gidlelogo.jpeg");
+            $sous_rubrique->setRubrique($this->getReference("Groupes"));
+            $manager->persist($sous_rubrique);
+            $this->addReference("(G)-idle", $sous_rubrique);
+
 
         $manager->flush();
     }
