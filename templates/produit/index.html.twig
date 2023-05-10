@@ -20,8 +20,12 @@
 			{% for produit in produits %}
 				<div class="col-sm-6 col-xl-3">
 					<a class="text-decoration-none link-dark" href="{{path('app_produit_show', {'id': produit.id}) }}">
-						<div class="text-center m-3"><img src="{{asset('img/produits/' ~ produit.picture)}}" class="d-block w-100" alt="..."></div>
+						<div class="text-center m-3">
+							<img class="d-block img-fluid" src="{{asset('img/produits/' ~ produit.picture)}}">
+						</div>
 						<p class="text-center">{{produit.name}}</p>
+						<p class="text-center">{{produit.price}}
+							€</p>
 					</a>
 				</div>
 			{% else %}
@@ -35,45 +39,45 @@
 
 
 	<!--<h1>Produit index</h1>
-					
-						<table class="table">
-							<thead>
-								<tr>
-									<th>Id</th>
-									<th>Name</th>
-									<th>Description</th>
-									<th>Price</th>
-									<th>Picture</th>
-									<th>Stock</th>
-									<th>Active</th>
-									<th>actions</th>
-								</tr>
-							</thead>
-							<tbody>
-								{% for produit in produits %}
-									<tr>
-										<td>{{ produit.id }}</td>
-										<td>{{ produit.name }}</td>
-										<td>{{ produit.description }}</td>
-										<td>{{ produit.price }}</td>
-										<td>{{ produit.picture }}</td>
-										<td>{{ produit.stock }}</td>
-										<td>{{ produit.active ? 'Yes' : 'No' }}</td>
-										<td>
-											<a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
-											<a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
-										</td>
-									</tr>
-								{% else %}
-									<tr>
-										<td colspan="8">no records found</td>
-									</tr>
-								{% endfor %}
-							</tbody>
-						</table>
-					
-						<a href="{{ path('app_produit_new') }}">Create new</a>
-					    -->
+																			
+																				<table class="table">
+																					<thead>
+																						<tr>
+																							<th>Id</th>
+																							<th>Name</th>
+																							<th>Description</th>
+																							<th>Price</th>
+																							<th>Picture</th>
+																							<th>Stock</th>
+																							<th>Active</th>
+																							<th>actions</th>
+																						</tr>
+																					</thead>
+																					<tbody>
+																						{% for produit in produits %}
+																							<tr>
+																								<td>{{ produit.id }}</td>
+																								<td>{{ produit.name }}</td>
+																								<td>{{ produit.description }}</td>
+																								<td>{{ produit.price }}</td>
+																								<td>{{ produit.picture }}</td>
+																								<td>{{ produit.stock }}</td>
+																								<td>{{ produit.active ? 'Yes' : 'No' }}</td>
+																								<td>
+																									<a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
+																									<a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
+																								</td>
+																							</tr>
+																						{% else %}
+																							<tr>
+																								<td colspan="8">no records found</td>
+																							</tr>
+																						{% endfor %}
+																					</tbody>
+																				</table>
+																			
+																				<a href="{{ path('app_produit_new') }}">Create new</a>
+																			    -->
 
 
 {% endblock %}
