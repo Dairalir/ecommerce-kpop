@@ -30,7 +30,7 @@ class ProduitType extends AbstractType
             ],
             'constraints' => [
                 new Regex([
-                    'pattern' => '/^[A-Za-zéèàçâêûîôäëüïö\_\-\s]+$/',
+                    'pattern' => '/^[0-9A-Za-zéèàçâêûîôäëüïö&\_\-\s]+$/',
                     'message' => 'Caratère(s) non valide(s)'
                 ]),
             ]
@@ -42,7 +42,7 @@ class ProduitType extends AbstractType
             ],
             'constraints' => [
                 new Regex([
-                    'pattern' => '/^[A-Za-zéèàçâêûîôäëüïö\_\-\s]+$/',
+                    'pattern' => '/^[0-9A-Za-zéèàçâêûîôäëüïö&\_\-\s]+$/',
                     'message' => 'Caratère(s) non valide(s)'
                 ]),
             ]
@@ -52,12 +52,6 @@ class ProduitType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Prix',
                 ],
-                //'constraints' => [
-                    //new Regex([
-                    //    'pattern' => '/^\d+(,\d{1,2})?$/',
-                    //    'message' => 'Caratère(s) non valide(s)'
-                    //]),
-                //]
             ])
             ->add('picture', FileType::class,[
                 'label' => 'Image du produit',
