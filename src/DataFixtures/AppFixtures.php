@@ -40,7 +40,6 @@ class AppFixtures extends Fixture
             $manager->persist($rubrique);
             $this->addReference("Groupes", $rubrique);
 
-
             // create sous rubrique
             $sous_rubrique = new SousRubrique();
             $sous_rubrique->setName('EP/mini Albums');
