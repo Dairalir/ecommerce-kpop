@@ -13,9 +13,19 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+            form_login:
+                # "app_login" is the name of the route created previously
+                login_path: app_login
+                check_path: app_login
         main:
             lazy: true
             provider: app_user_provider
+            logout:
+                path: app_logout
+
+                # where to redirect after logout
+                target: app_index
+            custom_authenticator: App\Security\LoginAuthenticator
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
