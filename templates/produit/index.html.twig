@@ -11,7 +11,7 @@
 				<div class="col-sm-6 col-xl-3">
 					<a class="text-decoration-none link-dark" href="{{path('app_produit_show', {'id': produit.id}) }}">
 						<div class="text-center m-3">
-							<img class="d-block img-fluid" src="{{asset('img/produits/' ~ produit.picture)}}">
+							<img class="img-thumbnail img-size" src="{{asset('img/produits/' ~ produit.picture)}}">
 						</div>
 						<p class="text-center">{{produit.name}}</p>
 						<p class="text-center">{{produit.price}}

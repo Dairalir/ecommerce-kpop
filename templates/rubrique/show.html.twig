@@ -11,7 +11,7 @@
 			{% for sous_rubrique in rubrique.sousRubriques %}
 				<div class="col-sm-6 col-xl-3 my-auto" height="100px">
 					<a class="text-decoration-none link-dark" href="{{path('app_sous_rubrique_show', {'id': sous_rubrique.id}) }}">
-						<div class="text-center m-3"><img src="{{asset('img/groupes/' ~ sous_rubrique.picture)}}" class="img-thumbnail" alt="..."></div>
+						<div class="text-center m-3"><img src="{{asset('img/groupes/' ~ sous_rubrique.picture)}}" class="img-thumbnail img-size" alt="..."></div>
 						<p class="text-center">{{sous_rubrique.name}}</p>
 					</a>
 				</div>
