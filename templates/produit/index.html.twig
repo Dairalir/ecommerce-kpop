@@ -17,7 +17,7 @@
 						<p class="text-center">{{produit.price}}
 							€</p>
 					</a>
-					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+					{% if is_granted('ROLE_ADMIN') %}
 						<a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
 						<a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
 					{% endif %}
@@ -29,7 +29,7 @@
 			{% endfor %}
 		</div>
 
-		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		{% if is_granted('ROLE_ADMIN') %}
 			<a class="btn btn-secondary" href="{{path('app_produit_new')}}">Ajouter nouveau produit</a>
 		{% endif %}
 	</div>
