@@ -27,6 +27,7 @@ class ProduitController extends AbstractController
     #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ProduitRepository $produitRepository, SluggerInterface $slugger): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $produit = new Produit();
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
@@ -55,10 +56,10 @@ class ProduitController extends AbstractController
 
             $produitRepository->save($produit, true);
 
-            $this->addFlash(
-                'success',
-                'Produit ajouté avec succès !!'
-            );
+            //$this->addFlash(
+            //    'success',
+            //    'Produit ajouté avec succès !!'
+            //);
 
             return $this->redirectToRoute('app_produit', [], Response::HTTP_SEE_OTHER);
         }
@@ -80,6 +81,7 @@ class ProduitController extends AbstractController
     #[Route('/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Produit $produit, ProduitRepository $produitRepository, SluggerInterface $slugger, Filesystem $filesystem): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
         
