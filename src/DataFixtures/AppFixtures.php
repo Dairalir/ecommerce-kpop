@@ -2,9 +2,10 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Fournisseur;
+use App\Entity\User;
 use App\Entity\Produit;
 use App\Entity\Rubrique;
+use App\Entity\Fournisseur;
 use App\Entity\SousRubrique;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -89,6 +90,13 @@ class AppFixtures extends Fixture
             $sous_rubrique->setRubrique($this->getReference("Groupes"));
             $manager->persist($sous_rubrique);
             $this->addReference("(G)-idle", $sous_rubrique);
+
+            $user = new User();
+            $user->setEmail('');
+            $user->setRoles(["ROLE_ADMIN"]);
+            $user->setPassword('123456');
+            $user->setIsVerified(true);
+            $manager->persist($user);
 
 
         $manager->flush();
