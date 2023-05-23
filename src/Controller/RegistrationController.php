@@ -64,7 +64,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/verify/email', name: 'app_verify_email')]
-    public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
+    public function verifyUserEmail(Request $request, TranslatorInterface $translator, EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -79,6 +79,11 @@ class RegistrationController extends AbstractController
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
+        
+        $user = $this->getUser();
+        $user->setRoles(["ROLE_USER"]);
+        $entityManager->persist($user);
+            $entityManager->flush();
 
         return $this->redirectToRoute('app_register');
     }
