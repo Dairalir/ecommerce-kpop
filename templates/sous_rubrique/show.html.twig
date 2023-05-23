@@ -8,10 +8,13 @@
 		<h1 class="text-center m-2 mb-3">{{ sous_rubrique.name }}</h1>
 		<div class="row">
 			{% for produit in sous_rubrique.produits %}
-				<div class="col-sm-6 col-xl-3">
+				<div class="text-center col-sm-6 col-xl-3">
 					<a class="text-decoration-none link-dark" href="{{path('app_produit_show', {'id': produit.id}) }}">
 						<div class="text-center m-3"><img src="{{asset('img/produits/' ~ produit.picture)}}" class="d-block w-100" alt="..."></div>
 						<p class="text-center">{{produit.name}}</p>
+					</a>
+					<a href="{{path("app_cart_add", {id: produit.id})}}" class="btn btn-secondary ">
+						Ajouter au panier
 					</a>
 				</div>
 			{% else %}
