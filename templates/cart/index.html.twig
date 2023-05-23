@@ -19,10 +19,10 @@
 				<tr>
 					<td><img src="{{asset('img/produits/' ~ element.produit.picture)}}" class="img-thumbnail img-size" alt="">
 						{{element.produit.name}}</td>
-					<td class="text-end">{{element.produit.price}}
+					<td class="">{{element.produit.price}}
 						€</td>
 					<td>{{element.quantite}}</td>
-					<td class="text-end">{{element.quantite * element.produit.price}}
+					<td class="">{{element.quantite * element.produit.price}}
 						€</td>
 					<td>
 						<a href="{{path("app_cart_add", {id: element.produit.id})}}" class="btn btn-success">
@@ -46,7 +46,7 @@
 		<tfoot>
 			<tr>
 				<td colspan="3">Total</td>
-				<td class="text-end">{{total}}€</td>
+				<td class="">{{total}}€</td>
 				<td></td>
 			</tr>
 		</tfoot>
