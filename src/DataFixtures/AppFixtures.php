@@ -3,7 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
-use App\Entity\Produit;
 use App\Entity\Rubrique;
 use App\Entity\Fournisseur;
 use App\Entity\SousRubrique;
@@ -92,9 +91,9 @@ class AppFixtures extends Fixture
             $this->addReference("(G)-idle", $sous_rubrique);
 
             $user = new User();
-            $user->setEmail('');
+            $user->setEmail('daimanvm@gmail.com');
             $user->setRoles(["ROLE_ADMIN"]);
-            $user->setPassword('123456');
+            $user->setPassword('123456'); //$2y$13$C3i2jiJXSpwfoXJs2OJ/jOhaJvPWfrfTbtqutlxG6W7JZb6GZUeiy
             $user->setIsVerified(true);
             $manager->persist($user);
 
