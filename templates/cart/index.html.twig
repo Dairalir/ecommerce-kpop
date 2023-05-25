@@ -4,52 +4,56 @@
 {% endblock %}
 
 {% block body %}
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Produit</th>
-				<th>Prix</th>
-				<th>Quantité</th>
-				<th>Total</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for element in dataCart %}
+	<form action="{{path("app_order")}}">
+		<table class="table">
+			<thead>
 				<tr>
-					<td><img src="{{asset('img/produits/' ~ element.produit.picture)}}" class="img-thumbnail img-size" alt="">
-						{{element.produit.name}}</td>
-					<td class="">{{element.produit.price}}
-						€</td>
-					<td>{{element.quantite}}</td>
-					<td class="">{{element.quantite * element.produit.price}}
-						€</td>
-					<td>
-						<a href="{{path("app_cart_add", {id: element.produit.id})}}" class="btn btn-success">
-							+
-						</a>
-						<a href="{{path("app_cart_remove", {id: element.produit.id})}}" class="btn btn-danger">
-							-
-						</a>
-						<a href="{{path("app_cart_delete", {id: element.produit.id})}}" class="btn">
-							Supression
-						</a>
-					</td>
+					<th>Produit</th>
+					<th>Prix</th>
+					<th>Quantité</th>
+					<th>Total</th>
+					<th>Actions</th>
 				</tr>
-			{% else %}
+			</thead>
+			<tbody>
+				{% for element in dataCart %}
+					<tr>
+						<td><img src="{{asset('img/produits/' ~ element.produit.picture)}}" class="img-thumbnail img-size" alt="">
+							{{element.produit.name}}</td>
+						<td class="">{{element.produit.price}}
+							€</td>
+						<td>{{element.quantite}}</td>
+						<td class="">{{element.quantite * element.produit.price}}
+							€</td>
+						<td>
+							<a href="{{path("app_cart_add", {id: element.produit.id})}}" class="btn btn-success">
+								+
+							</a>
+							<a href="{{path("app_cart_remove", {id: element.produit.id})}}" class="btn btn-danger">
+								-
+							</a>
+							<a href="{{path("app_cart_delete", {id: element.produit.id})}}" class="btn">
+								Supression
+							</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="5" class="text-center">
+							Votre panier est vide</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+			<tfoot>
 				<tr>
-					<td colspan="5" class="text-center">
-						Votre panier est vide</td>
+					<td colspan="3">Total</td>
+					<td class="">{{total}}€</td>
+					<td></td>
 				</tr>
-			{% endfor %}
-		</tbody>
-		<tfoot>
-			<tr>
-				<td colspan="3">Total</td>
-				<td class="">{{total}}€</td>
-				<td></td>
-			</tr>
-		</tfoot>
-	</table>
+			</tfoot>
+		</table>
+		<button class="btn btn-secondary" type="submit">Valider commande</button>
+	</form>
+
 
 {% endblock %}
