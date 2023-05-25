@@ -10,8 +10,10 @@
 			{% for produit in sous_rubrique.produits %}
 				<div class="text-center col-sm-6 col-xl-3">
 					<a class="text-decoration-none link-dark" href="{{path('app_produit_show', {'id': produit.id}) }}">
-						<div class="text-center m-3"><img src="{{asset('img/produits/' ~ produit.picture)}}" class="d-block w-100" alt="..."></div>
+						<div class="text-center m-3"><img src="{{asset('img/produits/' ~ produit.picture)}}" class="img-thumbnail img-size" alt="..."></div>
 						<p class="text-center">{{produit.name}}</p>
+						<p class="text-center">{{produit.price}}
+							€</p>
 					</a>
 					<a href="{{path("app_cart_add", {id: produit.id})}}" class="btn btn-secondary ">
 						Ajouter au panier
