@@ -3,3 +3,8 @@
     height:400px !important;
     width:400px ;
 }
+.img-min{
+    max-height:100px ;
+    height:100px !important;
+    width:100px ;
+}
