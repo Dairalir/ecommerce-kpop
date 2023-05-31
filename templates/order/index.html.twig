@@ -9,7 +9,7 @@
 		<div class='row'>
 			<div class='col-6'>
 				<p class='text-center'>Information livraison</p>
-				{{ form_start(form)}}
+				{{ form_start(form, {action:path('app_order_prepare')}) }}
 				<p>Adresse livraison</p>
 				{{ form_row(form.addresses_liv)| replace({'[-br]' : '</br>'})|raw}}
 				<p>Adresse facturation</p>
@@ -46,6 +46,21 @@
 					</tbody>
 				</tbody>
 				<tfoot>
+					<tr>
+						<td colspan="3">Sous-Total</td>
+						<td class="text-end">{{sousTotal}}€</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">TVA</td>
+						<td class="text-end">{{tva}}€</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">Frais de livraison</td>
+						<td class="text-end">{{livraison}}€</td>
+						<td></td>
+					</tr>
 					<tr>
 						<td colspan="3">Total</td>
 						<td class="text-end">{{total}}€</td>
