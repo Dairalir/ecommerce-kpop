@@ -47,6 +47,12 @@ class Commande
     #[ORM\OneToMany(mappedBy: 'OrderProduct', targetEntity: RecapDetails::class)]
     private Collection $recapDetails;
 
+    #[ORM\Column(length: 255)]
+    private ?string $transporterName = null;
+
+    #[ORM\Column]
+    private ?float $transporterPrice = null;
+
     public function __construct()
     {
         $this->recapDetails = new ArrayCollection();
@@ -191,6 +197,30 @@ class Commande
                 $recapDetail->setOrderProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTransporterName(): ?string
+    {
+        return $this->transporterName;
+    }
+
+    public function setTransporterName(string $transporterName): self
+    {
+        $this->transporterName = $transporterName;
+
+        return $this;
+    }
+
+    public function getTransporterPrice(): ?float
+    {
+        return $this->transporterPrice;
+    }
+
+    public function setTransporterPrice(float $transporterPrice): self
+    {
+        $this->transporterPrice = $transporterPrice;
 
         return $this;
     }

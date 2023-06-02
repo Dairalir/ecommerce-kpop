@@ -14,6 +14,8 @@
 				{{ form_row(form.addresses_liv)| replace({'[-br]' : '</br>'})|raw}}
 				<p>Adresse facturation</p>
 				{{ form_row(form.addresses_fac)| replace({'[-br]' : '</br>'})|raw}}
+				<p>Transporteur</p>
+				{{ form_row(form.transporter)| replace({'[-br]' : '</br>'})|raw}}
 			</div>
 			<div class='col-6'>
 				<p class='text-center'>Récapitulatif</p>
@@ -47,24 +49,8 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="3">Sous-Total</td>
-						<td class="text-end">{{sousTotal}}€</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="3">TVA</td>
-						<td class="text-end">{{tva}}€</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="3">Frais de livraison</td>
-						<td class="text-end">{{livraison}}€</td>
-						<td></td>
-					</tr>
-					<tr>
 						<td colspan="3">Total</td>
-						<td class="text-end">{{total}}€</td>
-						<td></td>
+						<td class="text-end">{{sousTotal}}€</td>
 					</tr>
 				</tfoot>
 			</table>

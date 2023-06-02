@@ -1,6 +1,84 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Vérifier la Commande
+{% endblock %}
 
 
-{% block body %}{% endblock %}
+{% block body %}
+<div class='container'>
+	<h1 class='text-center'>Vérifier la Commande</h1>
+	<div class='row mt-5'>
+		<div class='col-6 mt-2'>
+			<h3 class='text-center mb-4'>Information livraison</h3>
+			<input class='form-check-input' type='radio' checked>
+			<label class='form-check-label justify-content-between'>{{addressLiv | raw}}</label>
+		</div>
+		<div class='col-6 mt-2'>
+			<h3 class='text-center mb-4'>Information facturation</h3>
+			<input class='form-check-input' type='radio' checked>
+			<label class='form-check-label justify-content-between'>{{addressFac | raw}}</label>
+		</div>
+		<div class='col-6 mt-2'>
+			<h3 class='text-center mb-4'>Livraison</h3>
+			<input class='form-check-input' type='radio' checked>
+			<label>
+				<span class='form-check-label justify-content-between'>{{transporter.title}}</span>
+			</br>
+			<span class='form-check-label justify-content-between'>{{transporter.content}}</span>
+		</br>
+		<span class='form-check-label justify-content-between'>{{transporter.price}}€</span>
+	</label>
+
+</div>
+<div class='col-12 mt-5'>
+	<p class='text-center'>Récapitulatif de la commande ({{recapCart | length}}
+		produits)</p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Produit</th>
+				<th class="text-center">Prix</th>
+				<th class="text-center">Quantité</th>
+				<th class="text-end">Total</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% set soustotal = null %}
+			{% for produit in recapCart %}
+				<tr>
+					<td class="text-start col-3">
+						<img src="{{asset('img/produits/' ~ produit.produit.picture)}}" class="img-min">
+						<div>{{produit.produit.name}}</div>
+					</td>
+					<td class="col-3 text-center">{{produit.produit.price}}€</td>
+					<td class="col-3 text-center">{{produit.quantite}}</td>
+					<td class="text-end">{{produit.quantite * produit.produit.price}}€</td>
+				</tr>
+				{% set soustotal = soustotal + (produit.quantite * produit.produit.price) %}
+			{% endfor %}
+		</tbody>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="3">Sous-Total</td>
+			<td class="text-end">{{soustotal}}€</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td colspan="3">Frais de livraison</td>
+			<td class="text-end">{{transporter.price}}€</td>
+			<td></td>
+		</tr>
+
+		{% set total = soustotal + transporter.price %}
+		<tr>
+			<td colspan="3">Total</td>
+			<td class="text-end">{{total}}€</td>
+			<td></td>
+		</tr>
+	</tfoot>
+</table>
+<div class='text-center'>
+	<button class="btn btn-primary" type="submit">Valider votre commande
+	</button>
+</div></div></div></div {% endblock %}

@@ -80,6 +80,12 @@ class OrderController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             $datetime = new DateTime('now');
+
+            $transporter = $form->get('transporter')->getData();
+            //$tansporterOrder = $transporter->getTitle();
+            //$tansporterOrder .= '</br>'. $transporter->getContent();
+            //$tansporterOrder .= '</br>'. $transporter->getPrice();
+
             $adressLiv = $form->get('addresses_liv')->getData();
             $adressLivOrder = $adressLiv->getFirstName(). ' ' . $adressLiv->getLastName();
             $adressLivOrder .= '</br>'. $adressLiv->getPhone();
@@ -93,7 +99,7 @@ class OrderController extends AbstractController
             $adressFac = $form->get('addresses_fac')->getData();
             $adressFacOrder = $adressFac->getFirstName(). ' ' . $adressFac->getLastName();
             $adressFacOrder .= '</br>'. $adressFac->getPhone();
-            if($adressLiv->getCompany()){
+            if($adressFac->getCompany()){
                 $adressFacOrder .= ' - '. $adressFac->getCompany();
             }
             $adressFacOrder .= '</br>'. $adressFac->getAddress();
@@ -110,10 +116,12 @@ class OrderController extends AbstractController
             $order->setFacturationAddress($adressFacOrder);
             $order->setIsPaid(0);
             $order->setMethod('stripe');
+            $order->setTransporterName($transporter->getTitle());
+            $order->setTransporterPrice($transporter->getPrice());
 
             $this->em->persist($order);
             
-            foreach ($cartService->getTotal() as $product)
+            foreach ($cartService->getInfoCart() as $product)
             {
                 $recapDetails = new RecapDetails();
                 $recapDetails->setOrderProduct($order);
@@ -128,7 +136,8 @@ class OrderController extends AbstractController
 
             return $this->render('order/recap.html.twig',[
                 'method' => $order->getMethod(),
-                'recapCart' => $cartService->getTotal(),
+                'recapCart' => $cartService->getInfoCart(),
+                'transporter' => $transporter,
                 'addressLiv' => $adressLivOrder,
                 'addressFac' => $adressFacOrder,
                 'reference' => $order->getReference()
