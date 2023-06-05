@@ -75,6 +75,22 @@
 			</tr>
 		</tfoot>
 	</table>
-	<button class="btn btn-primary" type="submit">Valider votre commande
-	</button>
-</div></div>{% endblock %}
+</div>
+
+{% if method == 'stripe' %}
+
+	<form method="POST" action="#">
+		<button type="submit">
+			Payer par stripe
+			{{total}}€
+		</button>
+	</form>
+{% else %}
+
+	<form method="POST" action="#">
+		<button type="submit">
+			Payer par Paypal
+			{{total}}€
+		</button>
+	</form>
+{% endif %}</div>{% endblock %}
