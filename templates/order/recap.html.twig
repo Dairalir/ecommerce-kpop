@@ -5,31 +5,30 @@
 
 
 {% block body %}
-<div class='container'>
-	<h1 class='text-center'>Vérifier la Commande</h1>
-	<div class='row mt-5'>
-		<div class='col-6 mt-2'>
-			<h3 class='text-center mb-4'>Information livraison</h3>
-			<input class='form-check-input' type='radio' checked>
-			<label class='form-check-label justify-content-between'>{{addressLiv | raw}}</label>
-		</div>
-		<div class='col-6 mt-2'>
-			<h3 class='text-center mb-4'>Information facturation</h3>
-			<input class='form-check-input' type='radio' checked>
-			<label class='form-check-label justify-content-between'>{{addressFac | raw}}</label>
-		</div>
-		<div class='col-6 mt-2'>
-			<h3 class='text-center mb-4'>Livraison</h3>
-			<input class='form-check-input' type='radio' checked>
-			<label>
-				<span class='form-check-label justify-content-between'>{{transporter.title}}</span>
-			</br>
-			<span class='form-check-label justify-content-between'>{{transporter.content}}</span>
-		</br>
-		<span class='form-check-label justify-content-between'>{{transporter.price}}€</span>
-	</label>
-
+	<div class='container'>
+		<h1 class='text-center'>Vérifier la Commande</h1>
+		<div class='row mt-5'>
+			<div class='col-6 mt-2'>
+				<h3 class='text-center mb-4'>Information livraison</h3>
+				<input class='form-check-input' type='radio' checked>
+				<label class='form-check-label justify-content-between'>{{addressLiv | raw}}</label>
+			</div>
+			<div class='col-6 mt-2'>
+				<h3 class='text-center mb-4'>Information facturation</h3>
+				<input class='form-check-input' type='radio' checked>
+				<label class='form-check-label justify-content-between'>{{addressFac | raw}}</label>
+			</div>
+			<div class='col-6 mt-2'>
+				<h3 class='text-center mb-4'>Livraison</h3>
+				<input class='form-check-input' type='radio' checked>
+				<label class='form-check-label justify-content-between'>
+					{{transporter.title}}</br>
+				{{transporter.content}}</br>
+			{{transporter.price}}€
+		</label>
+	</div>
 </div>
+
 <div class='col-12 mt-5'>
 	<p class='text-center'>Récapitulatif de la commande ({{recapCart | length}}
 		produits)</p>
@@ -57,28 +56,25 @@
 				{% set soustotal = soustotal + (produit.quantite * produit.produit.price) %}
 			{% endfor %}
 		</tbody>
-	</tbody>
-	<tfoot>
-		<tr>
-			<td colspan="3">Sous-Total</td>
-			<td class="text-end">{{soustotal}}€</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td colspan="3">Frais de livraison</td>
-			<td class="text-end">{{transporter.price}}€</td>
-			<td></td>
-		</tr>
+		<tfoot>
+			<tr>
+				<td colspan="3">Sous-Total</td>
+				<td class="text-end">{{soustotal}}€</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan="3">Frais de livraison</td>
+				<td class="text-end">{{transporter.price}}€</td>
+				<td></td>
+			</tr>
 
-		{% set total = soustotal + transporter.price %}
-		<tr>
-			<td colspan="3">Total</td>
-			<td class="text-end">{{total}}€</td>
-			<td></td>
-		</tr>
-	</tfoot>
-</table>
-<div class='text-center'>
+			{% set total = soustotal + transporter.price %}
+			<tr>
+				<td colspan="3">Total</td>
+				<td class="text-end">{{total}}€</td>
+			</tr>
+		</tfoot>
+	</table>
 	<button class="btn btn-primary" type="submit">Valider votre commande
 	</button>
-</div></div></div></div {% endblock %}
+</div></div>{% endblock %}
