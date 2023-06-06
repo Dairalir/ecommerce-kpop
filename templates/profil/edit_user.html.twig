@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %}Modification Informations
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center">Modification Informations</h1>
+	<div class='container'>
+		{{ form_start(form)}}
+		{{ form_widget(form) }}
+		<button class="btn btn-primary" type="submit">Enregistrer
+		</button>
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

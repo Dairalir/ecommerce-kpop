@@ -2,15 +2,17 @@
 
 namespace App\Controller;
 
+use App\Form\UserType;
 use App\Entity\Address;
 use App\Form\AddressType;
+use App\Repository\UserRepository;
 use App\Repository\ClientRepository;
 use App\Repository\AddressRepository;
 use App\Repository\CommandeRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
 #[Route('/profil')]
 class ProfilController extends AbstractController
@@ -52,7 +54,7 @@ class ProfilController extends AbstractController
         ]);
     }
     #[Route('/userEdit', name: 'app_user_edit')]
-    public function userEdit(Request $request, ): Response
+    public function userEdit(Request $request, UserRepository $userRepository): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -66,7 +68,7 @@ class ProfilController extends AbstractController
 
             return $this->redirectToRoute('app_profil', [], Response::HTTP_SEE_OTHER);
         }
-        return $this->render('profil/new_address.html.twig', [
+        return $this->render('profil/edit_user.html.twig', [
             'form' => $form->createView(),
 
         ]);

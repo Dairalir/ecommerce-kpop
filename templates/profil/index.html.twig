@@ -19,7 +19,7 @@
 					<p>E-mail :
 						{{ app.user.email }}</p>
 				</div>
-				<a class="btn btn-secondary" href="#">modifier</a>
+				<a class="btn btn-secondary" href="{{path('app_user_edit')}}">modifier</a>
 			</div>
 			<div class="col-6">
 				<h3 class="text-center">Mes adresses</h3>
@@ -44,11 +44,30 @@
 			</div>
 		</div>
 		<h3>Mes commande</h3>
-		{% for commande in commandes %}
-			<p>{{commande}}</p>
-		{% else %}
-			<p>Pas de commandes en cours</p>
-		{% endfor %}
 
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Reference</th>
+					<th>Mode de livraison</th>
+					<th>Addresse livraison</th>
+					<th>Addresse facturation</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for commande in commandes %}
+					<tr>
+						<td>{{commande.reference}}</td>
+						<td>{{commande.transportername}}</td>
+						<td>{{commande.deliveryaddress | raw}}</td>
+						<td>{{commande.facturationaddress | raw}}</td>
+						<td>{{commande.createdat | date('Y-m-d') }}</td>
+					</tr>
+				{% else %}
+					<p>Pas de commandes en cours</p>
+				{% endfor %}
+			</tbody>
+		</table>
 	</div>
 {% endblock %}
