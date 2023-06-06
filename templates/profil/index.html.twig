@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center">
+		Mon profil
+	</h1>
+	<div class="container my-3">
+		<div class="row">
+			<div class="col-6">
+				<h3>Informations</h3>
+				<div class="row mt-4">
+					<p>Nom :
+						{{ app.user.lastname }}</p>
+					<p>Prénom :
+						{{ app.user.firstname }}</p>
+					<p>E-mail :
+						{{ app.user.email }}</p>
+				</div>
+				<a class="btn btn-secondary" href="#">modifier</a>
+			</div>
+			<div class="col-6">
+				<h3 class="text-center">Mes adresses</h3>
+				<div class="row mt-4">
+					{% for address in addresses %}
+						<div class="col-6">
+							<h5>{{address.name}}</h5><br>
+							{{address.firstname}}
+							{{address.lastname}}<br>
+							{{address.address}}<br>
+							{{address.city}}<br>
+							{{address.country}}<br>
+							{{address.phone}}<br>
+						</div>
+					{% else %}
+						<p>Pas d'addresses enregistrer</p>
+					{% endfor %}
+				</div>
+				<div class="text-center m-3">
+					<a class="btn btn-secondary" href="{{path('app_adress_new')}}">ajouter une adresses</a>
+				</div>
+			</div>
+		</div>
+		<h3>Mes commande</h3>
+		{% for commande in commandes %}
+			<p>{{commande}}</p>
+		{% else %}
+			<p>Pas de commandes en cours</p>
+		{% endfor %}
+
+	</div>
+{% endblock %}
