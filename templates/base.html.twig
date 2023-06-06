@@ -62,7 +62,7 @@
 				</ul>
 			</div>
 			{% if is_granted('ROLE_USER') %}
-				<a href="{{ path('app_logout') }}">Logout</a>
+				<a class="me-3" href="{{ path('app_logout') }}">Logout</a>
 			{% endif %}
 		</nav>
 
