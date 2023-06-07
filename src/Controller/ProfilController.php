@@ -53,6 +53,39 @@ class ProfilController extends AbstractController
 
         ]);
     }
+
+    #[Route('{id}/addressEdit', name: 'app_address_edit')]
+    public function addressEDit(Address $address, Request $request, AddressRepository $addressRepository): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $form = $this->createForm(AddressType::class, $address);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $address->setUser($this->getUser());
+            $addressRepository->save($address, true);
+
+            return $this->redirectToRoute('app_profil', [], Response::HTTP_SEE_OTHER);
+        }
+        return $this->render('profil/edit_address.html.twig', [
+            'address' => $address,
+            'form' => $form->createView(),
+
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_address_delete', methods: ['POST'])]
+    public function delete(Request $request, Address $address, AddressRepository $addressRepository, Filesystem $filesystem): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$address->getId(), $request->request->get('_token'))) {
+            $addressRepository->remove($address, true);
+        }
+
+        return $this->redirectToRoute('app_profil', [], Response::HTTP_SEE_OTHER);
+    }
+
     #[Route('/userEdit', name: 'app_user_edit')]
     public function userEdit(Request $request, UserRepository $userRepository): Response
     {

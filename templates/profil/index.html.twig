@@ -33,6 +33,7 @@
 							{{address.city}}<br>
 							{{address.country}}<br>
 							{{address.phone}}<br>
+							<a class="btn btn-primary" href="{{ path('app_address_edit', {'id': address.id}) }}">edit</a>
 						</div>
 					{% else %}
 						<p>Pas d'addresses enregistrer</p>

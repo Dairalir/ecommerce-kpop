@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Adresse
+{% endblock %}
+
+
+{% block body %}
+	<h1 class="text-center">Modifier adresse</h1>
+	<div class='container'>
+		{{ form_start(form)}}
+		{{ form_widget(form) }}
+		<button class="btn btn-primary" type="submit">Enregistrer
+		</button>
+		<form method="post" action="{{ path('app_address_delete', {'id': address.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+			<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ address.id) }}">
+			<button class="btn btn-primary">Delete</button>
+		</form>
+		{{ form_end(form) }}
+
+	</div>
+{% endblock %}
