@@ -32,6 +32,10 @@ class OrderController extends AbstractController
 
         $cart = $session->get("cart", []);
 
+        if (empty($cart)){
+            return $this->redirectToRoute('app_cart');
+        }
+
         //on "fabrique" les données
         $dataCart = [];
         $sousTotal = 0;

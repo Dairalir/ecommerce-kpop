@@ -19,7 +19,7 @@
 					<p>E-mail :
 						{{ app.user.email }}</p>
 				</div>
-				<a class="btn btn-secondary" href="{{path('app_user_edit')}}">modifier</a>
+				<a class="btn btn-secondary" href="{{path('app_user_edit')}}">Modifier</a>
 			</div>
 			<div class="col-6">
 				<h3 class="text-center">Mes adresses</h3>
@@ -33,14 +33,14 @@
 							{{address.city}}<br>
 							{{address.country}}<br>
 							{{address.phone}}<br>
-							<a class="btn btn-primary" href="{{ path('app_address_edit', {'id': address.id}) }}">edit</a>
+							<a class="btn btn-primary" href="{{ path('app_address_edit', {'id': address.id}) }}">Modifier</a>
 						</div>
 					{% else %}
 						<p>Pas d'addresses enregistrer</p>
 					{% endfor %}
 				</div>
 				<div class="text-center m-3">
-					<a class="btn btn-secondary" href="{{path('app_adress_new')}}">ajouter une adresses</a>
+					<a class="btn btn-secondary" href="{{path('app_adress_new')}}">ajouter une adresse</a>
 				</div>
 			</div>
 		</div>
@@ -66,7 +66,7 @@
 						<td>{{commande.createdat | date('Y-m-d') }}</td>
 					</tr>
 				{% else %}
-					<p>Pas de commandes en cours</p>
+					<td>Pas de commandes en cours</td>
 				{% endfor %}
 			</tbody>
 		</table>

@@ -41,7 +41,8 @@
 					{% else %}
 						<tr>
 							<td colspan="5" class="text-center">
-								Votre panier est vide</td>
+								<h3>Votre panier est vide</h3>
+							</td>
 						</tr>
 					{% endfor %}
 				</tbody>
@@ -53,7 +54,11 @@
 					</tr>
 				</tfoot>
 			</table>
-			<button class="btn btn-secondary" type="submit">Valider commande</button>
+			{% if dataCart is empty %}
+				<button class="btn btn-secondary" type="submit" disabled>Valider le panier</button>
+			{% else %}
+				<button class="btn btn-secondary" type="submit">Valider le panier</button>
+			{% endif %}
 		</form>
 	</div>
 
