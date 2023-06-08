@@ -19,19 +19,6 @@ class CartService
         $this->em = $em;
     }
 
-    //public function getTotal()
-    //{
-    //    $cart = $this->getSession()->get("cart", []);
-    //    $dataCart = [];
-    //    foreach($cart as $id => $quantite) {
-    //        $produit = $this->em->getRepository(Produit::class)->findOneBy(['id' => $id]);
-    //        $dataCart[] = [
-    //            "produit" => $produit,
-    //            "quantite" => $quantite
-    //        ];
-    //    }
-    //    return $dataCart;
-    //}
     public function getInfoCart()
     {
         $cart = $this->getSession()->get("cart", []);
@@ -45,6 +32,11 @@ class CartService
             ];
         }
         return $dataCart;
+    }
+
+    public function deleteCart()
+    {
+        return $this->getSession()->remove('cart');
     }
 
     private function getSession(): SessionInterface
