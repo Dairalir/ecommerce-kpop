@@ -9,39 +9,51 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ProduitRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
-#[ApiResource()]
+#[ApiResource(
+    normalizationContext: [ "groups" => ["read:product"]]
+    )]
 class Produit
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["read:product"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(["read:product"])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["read:product"])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
+    #[Groups(["read:product"])]
     private ?string $price = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["read:product"])]
     private ?string $picture = null;
 
     #[ORM\Column]
+    #[Groups(["read:product"])]
     private ?int $stock = null;
 
     #[ORM\Column]
+    #[Groups(["read:product"])]
     private ?bool $active = null;
 
     #[ORM\ManyToMany(targetEntity: SousRubrique::class, inversedBy: 'produits')]
+    #[Groups(["read:product"])]
     private Collection $sous_rubrique;
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(["read:product"])]
     private ?Fournisseur $fournisseur = null;
 
     public function __construct()
