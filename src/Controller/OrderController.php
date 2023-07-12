@@ -139,11 +139,12 @@ class OrderController extends AbstractController
             }
             $this->em->flush();
 
+            $recapCart = $cartService->getInfoCart();
             $cartService->deleteCart();
 
             return $this->render('order/recap.html.twig',[
                 'method' => $order->getMethod(),
-                'recapCart' => $cartService->getInfoCart(),
+                'recapCart' => $recapCart,
                 'transporter' => $transporter,
                 'addressLiv' => $adressLivOrder,
                 'addressFac' => $adressFacOrder,
