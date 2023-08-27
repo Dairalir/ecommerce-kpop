@@ -19,7 +19,7 @@
 					<p>E-mail :
 						{{ app.user.email }}</p>
 				</div>
-				<a class="btn btn-secondary" href="{{path('app_user_edit')}}">Modifier</a>
+				<a class="btn btn-secondary" href="{{path('app_user_edit', {'id': app.user.id})}}">Modifier</a>
 			</div>
 			<div class="col-6">
 				<h3 class="text-center">Mes adresses</h3>

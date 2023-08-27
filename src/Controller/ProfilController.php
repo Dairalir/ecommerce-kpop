@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\UserType;
 use App\Entity\Address;
+use App\Entity\User;
 use App\Form\AddressType;
 use App\Repository\UserRepository;
 use App\Repository\ClientRepository;
@@ -86,8 +87,8 @@ class ProfilController extends AbstractController
         return $this->redirectToRoute('app_profil', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/userEdit', name: 'app_user_edit')]
-    public function userEdit(Request $request, UserRepository $userRepository): Response
+    #[Route('/{id}/userEdit', name: 'app_user_edit')]
+    public function userEdit(User $user, Request $request, UserRepository $userRepository): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
