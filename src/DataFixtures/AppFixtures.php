@@ -44,21 +44,21 @@ class AppFixtures extends Fixture
             // create sous rubrique
             $sous_rubrique = new SousRubrique();
             $sous_rubrique->setName('EP/mini Albums');
-            $sous_rubrique->setPicture("");
+            $sous_rubrique->setPicture("mini_album.jpg");
             $sous_rubrique->setRubrique($this->getReference("Albums"));
             $manager->persist($sous_rubrique);
             $this->addReference("EP/mini Albums", $sous_rubrique);
 
             $sous_rubrique = new SousRubrique();
             $sous_rubrique->setName('Albums Studio');
-            $sous_rubrique->setPicture("");
+            $sous_rubrique->setPicture("album.jpg");
             $sous_rubrique->setRubrique($this->getReference("Albums"));
             $manager->persist($sous_rubrique);
             $this->addReference("Albums Studio", $sous_rubrique);
 
             $sous_rubrique = new SousRubrique();
             $sous_rubrique->setName('Lighstick');
-            $sous_rubrique->setPicture("");
+            $sous_rubrique->setPicture("lightstick.jpg");
             $sous_rubrique->setRubrique($this->getReference("Merch"));
             $manager->persist($sous_rubrique);
             $this->addReference("Lighstick", $sous_rubrique);
