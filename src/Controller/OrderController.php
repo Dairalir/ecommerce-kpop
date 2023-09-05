@@ -7,6 +7,7 @@ use App\Entity\Produit;
 use App\Form\OrderType;
 use App\Entity\Commande;
 use App\Entity\RecapDetails;
+use App\Repository\CommandeRepository;
 use App\Service\CartService;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -153,5 +154,15 @@ class OrderController extends AbstractController
         }
         
         return $this->redirectToRoute('app_cart');
+    }
+
+    #[Route('/{id}', name: 'app_order_delete', methods: ['POST'])]
+    public function delete(Request $request, Commande $commande, CommandeRepository $commandeRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$commande->getId(), $request->request->get('_token'))) {
+            $commandeRepository->remove($commande, true);
+        }
+
+        return $this->redirectToRoute('app_profil', [], Response::HTTP_SEE_OTHER);
     }
 }

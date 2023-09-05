@@ -17,10 +17,20 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class ProduitController extends AbstractController
 {
     #[Route('/', name: 'app_produit', methods: ['GET'])]
-    public function index(ProduitRepository $produitRepository): Response
+    public function index(ProduitRepository $produitRepository, Request $request): Response
     {
-        return $this->render('produit/index.html.twig', [
+        $search = $request->query->get("search");
+        if($search === ""){
+            return $this->render('produit/index.html.twig', [
             'produits' => $produitRepository->findAll(),
+        ]);
+        }
+        return $this->render('produit/index.html.twig', [
+            'produits' => $produitRepository->createQueryBuilder('p')
+            ->where('p.name LIKE :search')
+            ->setParameter('search', "%$search%")
+            ->getQuery()
+            ->getResult()
         ]);
     }
 
