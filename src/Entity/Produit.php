@@ -56,9 +56,13 @@ class Produit
     #[Groups(["read:product"])]
     private ?Fournisseur $fournisseur = null;
 
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'favoris')]
+    private Collection $favoris;
+
     public function __construct()
     {
         $this->sous_rubrique = new ArrayCollection();
+        $this->favoris = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -170,6 +174,30 @@ class Produit
     public function setFournisseur(?Fournisseur $fournisseur): self
     {
         $this->fournisseur = $fournisseur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(User $favori): static
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris->add($favori);
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(User $favori): static
+    {
+        $this->favoris->removeElement($favori);
 
         return $this;
     }

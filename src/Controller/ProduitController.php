@@ -3,14 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
+use App\Entity\User;
 use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 #[Route('/produit')]
@@ -32,6 +34,15 @@ class ProduitController extends AbstractController
             ->getQuery()
             ->getResult()
         ]);
+    }
+
+    #[Route('/fav', name: 'app_produit_favoris', methods: ['GET'])]
+    public function showFavorite(): Response
+    {
+        if($this->getUser()){
+            return $this->render('favoris/index.html.twig');
+        }
+        return $this->redirectToRoute('app_login');
     }
 
     #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
@@ -144,4 +155,22 @@ class ProduitController extends AbstractController
 
         return $this->redirectToRoute('app_produit', [], Response::HTTP_SEE_OTHER);
     }
+    
+    #[Route('/{id}/addfav', name: 'app_produit_add_favoris', methods: ['POST'])]
+    public function addFavorite( EntityManagerInterface $em, Produit $produit, Request $request): Response
+    {
+        $referer = $request->headers->get('referer');
+        $user = $this->getUser();
+        if(!$produit->getFavoris()->contains($user)){
+            $produit->addFavori($user);
+        }else{
+            $produit->removeFavori($user);
+        }
+        $em->persist($produit);
+        $em->flush();
+
+        return $this->redirect($referer, Response::HTTP_SEE_OTHER);
+    }
+
+    
 }
