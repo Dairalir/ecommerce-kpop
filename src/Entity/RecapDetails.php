@@ -29,6 +29,9 @@ class RecapDetails
     #[ORM\Column]
     private ?float $totalRecap = null;
 
+    #[ORM\Column]
+    private ?int $id_product = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class RecapDetails
     public function setTotalRecap(float $totalRecap): self
     {
         $this->totalRecap = $totalRecap;
+
+        return $this;
+    }
+
+    public function getIdProduct(): ?int
+    {
+        return $this->id_product;
+    }
+
+    public function setIdProduct(int $id_product): static
+    {
+        $this->id_product = $id_product;
 
         return $this;
     }

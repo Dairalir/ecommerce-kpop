@@ -39,6 +39,25 @@ class ProduitRepository extends ServiceEntityRepository
         }
     }
 
+    public function FindByTopSell()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "
+        SELECT produit.*, SUM(quantity)
+        FROM recap_details
+        JOIN produit ON recap_details.id_product = produit.id
+        GROUP BY id_product
+        ORDER BY SUM(quantity) DESC
+        LIMIT 4
+        ";
+
+        $stmt = $conn->prepare($sql);
+
+        $result = $stmt->executeQuery();
+
+        return $result->fetchAllAssociative();
+    }
 //    /**
 //     * @return Produit[] Returns an array of Produit objects
 //     */

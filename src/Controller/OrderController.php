@@ -132,6 +132,7 @@ class OrderController extends AbstractController
                 $recapDetails = new RecapDetails();
                 $recapDetails->setOrderProduct($order);
                 $recapDetails->setQuantity($product['quantite']);
+                $recapDetails->setIdProduct($product['produit']->getId());
                 $recapDetails->setPrice($product['produit']->getPrice());
                 $recapDetails->setProduct($product['produit']->getName());
                 $recapDetails->setTotalRecap($product['produit']->getPrice() * $product['quantite']);
