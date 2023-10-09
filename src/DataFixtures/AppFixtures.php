@@ -98,6 +98,13 @@ class AppFixtures extends Fixture
             $user->setIsVerified(true);
             $manager->persist($user);
 
+            $user = new User();
+            $user->setEmail('user@gmail.com');
+            $user->setRoles(["ROLE_USER"]);
+            $user->setPassword('$2y$13$C3i2jiJXSpwfoXJs2OJ/jOhaJvPWfrfTbtqutlxG6W7JZb6GZUeiy'); //$2y$13$C3i2jiJXSpwfoXJs2OJ/jOhaJvPWfrfTbtqutlxG6W7JZb6GZUeiy   // 123456
+            $user->setIsVerified(true);
+            $manager->persist($user);
+
             $transporter = new Transporter();
             $transporter->setTitle('Colissimo');
             $transporter->setContent('Livraison 2 à 3 jours');
